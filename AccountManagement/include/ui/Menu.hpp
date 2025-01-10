@@ -13,6 +13,10 @@ public:
     void run();
 
 private:
+    void waitForReturn() const;
+    bool confirmContinue(const std::string& operation) const;
+    void printTableHeader() const;
+    
     AccountBook book_;
     void showMainMenu() const;
     void handleInput();

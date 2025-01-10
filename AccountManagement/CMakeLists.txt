@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.10)
 project(AccountManagement VERSION 1.0)
 
+# 添加构建选项
+option(BUILD_TESTS "Build test cases" OFF)
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -19,6 +22,11 @@ file(GLOB_RECURSE SOURCES "src/*.cpp")
 # 可执行文件
 add_executable(account_manager ${SOURCES})
 
-# 测试配置
-enable_testing()
-add_subdirectory(test)
+# 条件编译测试
+if(BUILD_TESTS)
+    enable_testing()
+    add_subdirectory(test)
+    message(STATUS "Building with tests enabled")
+else()
+    message(STATUS "Building without tests")
+endif()

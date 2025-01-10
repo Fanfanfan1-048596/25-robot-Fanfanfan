@@ -47,9 +47,10 @@
   - 符合开闭原则
 
 #### 2.3 持久化存储
-- 采用二进制文件存储
-  - 优点：读写效率高，空间利用率好
-  - 缺点：可读性差，但对于程序内部使用影响不大
+- 采用CSV文件存储
+  - 优点：可读性好，便于导出和编辑
+  - 兼容Excel等办公软件
+  - 支持数据迁移和共享
 
 ### 3. 技术特点
 
@@ -84,8 +85,14 @@ cd ./account-management
 
 1. 创建构建目录并编译
 ```bash
+# 不包含测试的构建
 mkdir build && cd build
-cmake .. -DCMAKE_BUILD_TYPE=Debug
+cmake ..
+make
+
+# 包含测试的构建
+mkdir build && cd build
+cmake -DBUILD_TESTS=ON ..
 make
 ```
 
@@ -124,7 +131,8 @@ make
 - 日期格式：YYYY-MM-DD
 - 金额格式：收入为正数，支出为负数
 - 退出时自动保存数据
-- 数据存储在data/accounts.dat
+- 数据以CSV格式存储在build/data/accounts.csv
+- 可直接用Excel打开查看数据
 
 ## 代码结构
 ```
@@ -186,10 +194,10 @@ account-management
 - 优化文件读写性能
 
 ### 2. 功能扩展方面
-- 可以支持数据导出为CSV/Excel
 - 添加图形化UI
 - 实现多用户支持
 - 添加数据备份功能
+- 支持更多数据导出格式
 
 ### 3. 代码改进点
 - 增强异常处理机制
